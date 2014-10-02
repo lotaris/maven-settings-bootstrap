@@ -1,0 +1,52 @@
+{
+  "name": "maven-settings-bootstrap",
+  "description": "Maven Settings Boostraper",
+  "version": "0.0.1",
+  "main": "./lib",
+  "bin": {
+    "msb": "./bin/maven-settings-bootstrap"
+  },
+  "scripts": {
+    "test": "grunt"
+  },
+  "devDependencies": {
+    "buffertools": "^2.1.2",
+    "grunt": "~0.4.4",
+    "grunt-bump": "~0.0.13",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-docker": "0.0.8",
+    "grunt-gh-pages": "~0.9.1",
+    "grunt-jasmine-node": "~0.2.1",
+    "quip": "^0.1.2",
+    "tmp-sync": "^1.0.1"
+  },
+  "dependencies": {
+    "electrolyte": "0.0.3",
+    "fs-more": "0.0.4",
+    "inflection": "^1.5.0",
+    "js-yaml": "^3.1.0",
+    "q": "^1.0.1",
+    "swig": "^1.4.2",
+    "underscore": "^1.6.0",
+    "xregexp": "^2.0.0"
+  },
+  "homepage": "https://github.com/lotaris/maven-settings-bootstrap",
+  "bugs": {
+    "url": ""
+  },
+  "author": {
+    "name": "Laurent Prevost",
+    "email": "laurent.prevost@forbes-digital.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lotaris/maven-settings-bootstrap"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "/blob/master/LICENSE-MIT"
+    }
+  ]
+}

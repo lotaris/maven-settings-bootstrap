@@ -1,0 +1,8 @@
+vars:
+  mysql_username: "databaseUser"
+  mysql_password: "databasePassword"
+
+properties:
+  profile.one.mysql.user: "moreSpecificDatabaseUser"
+  profile.two.mysql.user: "moreSpecificDifferentDatabaseUser"
+  profile.three.mysql.db: "weNeedToUseDifferentDbNameForSpecificTest"
