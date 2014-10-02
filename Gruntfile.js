@@ -32,27 +32,27 @@ module.exports = function(grunt) {
       doc: {
         src: [ 'lib' ],
         dest: 'doc/annotated'
+      },
+      ghp: {
+        src: [ 'lib' ],
+        dest: 'tmp/gh-pages/annotated'
       }
-      // ghp: {
-      //   src: [ 'lib' ],
-      //   dest: 'tmp/gh-pages/annotated'
-      // }
     },
 
-    // 'gh-pages': {
-    //   options: {
-    //     base: 'tmp/gh-pages',
-    //     add: true,
-    //     message: 'Updated annotated source'
-    //   },
-    //   all: {
-    //     src: '**'
-    //   }
-    // },
+    'gh-pages': {
+      options: {
+        base: 'tmp/gh-pages',
+        add: true,
+        message: 'Updated annotated source'
+      },
+      all: {
+        src: '**'
+      }
+    },
 
     clean: {
-      doc: [ 'doc' ]
-      // ghp: [ 'tmp/gh-pages' ]
+      doc: [ 'doc' ],
+      ghp: [ 'tmp/gh-pages' ]
     }
   });
 
@@ -67,5 +67,5 @@ module.exports = function(grunt) {
   grunt.registerTask('unit', [ 'jshint', 'jasmine_node:unit' ]);
   grunt.registerTask('int', [ 'jshint', 'jasmine_node:integration' ]);
   grunt.registerTask('doc', [ 'clean:doc', 'docker:doc' ]);
-//  grunt.registerTask('ghp', [ 'clean:ghp', 'docker:ghp', 'gh-pages' ]);
+  grunt.registerTask('ghp', [ 'clean:ghp', 'docker:ghp', 'gh-pages' ]);
 };

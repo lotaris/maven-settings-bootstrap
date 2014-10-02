@@ -16,7 +16,7 @@
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-jshint": "~0.10.0",
     "grunt-docker": "0.0.8",
-    "grunt-gh-pages": "~0.9.1",
+    "grunt-gh-pages": "^0.9.1",
     "grunt-jasmine-node": "~0.2.1",
     "quip": "^0.1.2",
     "tmp-sync": "^1.0.1"

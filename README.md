@@ -339,8 +339,8 @@ Please add a changelog entry with your name for new features and bug fixes.
 API Copilot is licensed under the [MIT License](http://opensource.org/licenses/MIT).
 See [LICENSE.txt](LICENSE.txt) for the full text.
 
-[annotated-source]: https://github.com/lotaris/maven-settings-bootstrap
-[first-example]: https://github.com/lotaris/maven-settings-bootstrap
-[first-result]: https://github.com/lotaris/maven-settings-bootstrap
-[second-example]: https://github.com/lotaris/maven-settings-bootstrap
-[second-result]: https://github.com/lotaris/maven-settings-bootstrap
+[annotated-source]: http://lotaris.github.io/maven-settings-bootstrap/annotated/index.js.html
+[first-example]: https://github.com/lotaris/maven-settings-bootstrap/tree/master/examples/sources/first-example
+[first-result]: https://github.com/lotaris/maven-settings-bootstrap/tree/master/examples/results/first-example
+[second-example]: https://github.com/lotaris/maven-settings-bootstrap/tree/master/examples/sources/second-example
+[second-result]: https://github.com/lotaris/maven-settings-bootstrap/tree/master/examples/results/second-example
