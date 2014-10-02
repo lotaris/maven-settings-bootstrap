@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>cli.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = "", thisFile = "Users/lprevost/repos/git-ext/maven-settings-bootstrap//cli.js", defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h1">
+        <a href="#client">Client</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="client">
+  <h1>
+    <a href="#client" name="client" class="pilcrow">&#182;</a>
+    Client
+  </h1>
+</div>
+
+
+<p>Entry point to execute the tool</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">inflection</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;inflection&#39;</span><span class="p">),</span>
+    <span class="nx">_</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;underscore&#39;</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">bootstrap</span><span class="p">,</span> <span class="nx">cliEnv</span><span class="p">,</span> <span class="nx">print</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">function</span> <span class="nx">Cli</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+
+  <span class="nx">_</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">Cli</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span> <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>Execute the settings.xml bootstraping</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">Q.Promise</span>
+      <span>A promise which the result of the process</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">execute</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nx">bootstrap</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">loadEnvironmentOptions</span><span class="p">()).</span><span class="nx">run</span><span class="p">().</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">print</span><span class="p">(</span><span class="s2">&quot;An error occured during the settings.xml generation: &quot;</span> <span class="o">+</span> <span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+        <span class="nx">print</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">stack</span><span class="p">);</span>
+      <span class="p">});</span>
+    <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>Retrieve from the environment variables the different options that
+can be used by the tool</p>
+  </div>
+  <div class="body"><div class='highlight'><pre><code language=''>options:
+  MSB_CONFIG_FILE:
+     The configuration file
+     default: ~/.m2/msb.yml (maven user home directory)
+  MSB_BOOTSTRAP_FILE:
+     The settings.xml template from which to bootstrap the effective settings.xml
+     default: msb-settings.xml (current working directory)
+  MSB_OUTPUT_FILE:
+     The file path to the place where the settings.xml will be generated
+     default: settings.xml (current working directory)
+</code></pre></div>
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">Object</span>
+      <span>The options retrieved from the variables</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">loadEnvironmentOptions</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">reduce</span><span class="p">([</span> <span class="s1">&#39;configFile&#39;</span><span class="p">,</span> <span class="s1">&#39;bootstrapFile&#39;</span><span class="p">,</span> <span class="s1">&#39;outputFile&#39;</span> <span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">memo</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">envName</span> <span class="o">=</span> <span class="s1">&#39;MSB_&#39;</span> <span class="o">+</span> <span class="nx">inflection</span><span class="p">.</span><span class="nx">underscore</span><span class="p">(</span><span class="nx">name</span><span class="p">).</span><span class="nx">toUpperCase</span><span class="p">();</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">_</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">cliEnv</span><span class="p">,</span> <span class="nx">envName</span><span class="p">))</span> <span class="p">{</span>
+          <span class="nx">memo</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">cliEnv</span><span class="p">[</span><span class="nx">envName</span><span class="p">];</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nx">memo</span><span class="p">;</span>
+      <span class="p">},</span> <span class="p">{});</span>
+
+      <span class="nx">options</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">_home</span><span class="o">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">HOME</span> <span class="o">||</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">HOMEPATH</span> <span class="o">||</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">USERPROFILE</span>
+      <span class="p">});</span>
+
+      <span class="k">return</span> <span class="nx">options</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+
+  <span class="k">return</span> <span class="nx">Cli</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">[</span><span class="s1">&#39;@require&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span> <span class="s1">&#39;bootstrap&#39;</span><span class="p">,</span> <span class="s1">&#39;cli.env&#39;</span><span class="p">,</span> <span class="s1">&#39;print&#39;</span> <span class="p">];</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>

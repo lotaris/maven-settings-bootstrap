@@ -1,0 +1,6 @@
+vars:
+  mysql_username: "abcdef"
+  mysql_password: "fedcba"
+
+properties:
+  some.path.somewhere.in.the.file: "uvwxyz"

@@ -1,0 +1,3 @@
+vars:
+  mysql_username: "databaseUser"
+  mysql_password: "databasePassword"

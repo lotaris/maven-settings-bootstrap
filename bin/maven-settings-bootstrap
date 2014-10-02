@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+// vim: set syntax=javascript:
+
+var bootstrap = require('maven-settings-bootstrap');
+var Cli = bootstrap.cli;
+new Cli().execute();

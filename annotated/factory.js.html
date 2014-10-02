@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>factory.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = "", thisFile = "Users/lprevost/repos/git-ext/maven-settings-bootstrap//factory.js", defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h1">
+        <a href="#factory">Factory</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="factory">
+  <h1>
+    <a href="#factory" name="factory" class="pilcrow">&#182;</a>
+    Factory
+  </h1>
+</div>
+
+  </div>
+  <div class="body"><p>Allow creating different object for the plumbing of the tool</p>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">ioc</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./ioc&#39;</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="nx">generator</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>Create a new configuration with the options given</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">options</span>
+      <span class="dox_type">Object</span>
+      <span>The options to create the new configuration</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">Configuration</span>
+      <span>The configuration created</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">createConfiguration</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nx">config</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+    <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>Create a new generator from the configuration</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">configuration</span>
+      <span class="dox_type">Configuration</span>
+      <span>The configuration to create the generator</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">Generator</span>
+      <span>The generator created</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">createGenerator</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">configuration</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nx">generator</span><span class="p">(</span><span class="nx">configuration</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">[</span><span class="s1">&#39;@require&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">,</span> <span class="s1">&#39;generator&#39;</span><span class="p">];</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>

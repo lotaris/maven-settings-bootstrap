@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>generator.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = "", thisFile = "Users/lprevost/repos/git-ext/maven-settings-bootstrap//generator.js", defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h1">
+        <a href="#settings%20file%20generator">Settings file generator</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="settings%20file%20generator">
+  <h1>
+    <a href="#settings%20file%20generator" name="settings%20file%20generator" class="pilcrow">&#182;</a>
+    Settings file generator
+  </h1>
+</div>
+
+  </div>
+  <div class="body"><p>Generate the effective settings.xml file</p>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">_</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;underscore&#39;</span><span class="p">),</span>
+    <span class="nx">Q</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">),</span>
+    <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fs</span><span class="p">,</span> <span class="nx">print</span><span class="p">)</span> <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>Constructor</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">config</span>
+      <span class="dox_type">Configuration</span>
+      <span>The configuration to build the generator</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="kd">function</span> <span class="nx">Generator</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">config</span> <span class="o">=</span> <span class="nx">config</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">_</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">Generator</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span> <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>Generate the settings.xml file. Take the source file, aplly the templating
+and store the result to the destination.</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">Q.Promise</span>
+      <span>A promise to handle the generation</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">generateSettings</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">Q</span><span class="p">.</span><span class="nx">all</span><span class="p">([</span>
+        <span class="nx">fs</span><span class="p">.</span><span class="nx">outputFileQ</span><span class="p">(</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">outputFilePath</span><span class="p">,</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">templateEngine</span><span class="p">.</span><span class="nx">renderFile</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">bootstrapFilePath</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">getMsbConfiguration</span><span class="p">())</span>
+        <span class="p">),</span>
+        <span class="nx">Q</span><span class="p">.</span><span class="nx">fcall</span><span class="p">(</span><span class="nx">_</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+          <span class="nx">print</span><span class="p">(</span><span class="s2">&quot;The &#39;&quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">outputFilePath</span> <span class="o">+</span> <span class="s2">&quot;&#39; successfully generated.&quot;</span><span class="p">);</span>
+        <span class="p">},</span> <span class="k">this</span><span class="p">))</span>
+      <span class="p">]);</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+
+  <span class="k">return</span> <span class="nx">Generator</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">[</span><span class="s1">&#39;@require&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;fs-more&#39;</span><span class="p">,</span> <span class="s1">&#39;print&#39;</span><span class="p">];</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>

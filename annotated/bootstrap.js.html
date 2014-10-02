@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>bootstrap.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = "", thisFile = "Users/lprevost/repos/git-ext/maven-settings-bootstrap//bootstrap.js", defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h1">
+        <a href="#bootstrap">Bootstrap</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="bootstrap">
+  <h1>
+    <a href="#bootstrap" name="bootstrap" class="pilcrow">&#182;</a>
+    Bootstrap
+  </h1>
+</div>
+
+  </div>
+  <div class="body"><p>Brings all the plumbing to execute the settings.xml generation from its template</p>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">ioc</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./ioc&#39;</span><span class="p">),</span>
+  <span class="nx">Q</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">),</span>
+  <span class="nx">swig</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;swig&#39;</span><span class="p">),</span>
+  <span class="nx">_</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;underscore&#39;</span><span class="p">),</span>
+  <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>Constructor</p>
+  </div>
+  <div class="body"><p>At the moment, only these options are supported:</p>
+
+<ul>
+<li><code>configFile</code>: A path to the <code>msb</code> configuration file for the generation process<br /><strong>default</strong>: <code>~/.m2/msb.yml</code></li>
+<li><code>bootstrapFile</code>: A path to the bootstrap setting.xml file<br /><strong>default</strong>: <code>msb-settings.xml</code></li>
+<li><code>outputFile</code>: A path to the place where the <code>settings.xml</code> will be generated. The name of the file itself must be part of the path.<br /><strong>default</strong>: <code>settings.xml</code></li>
+</ul>
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_type">Object</span>
+      <span>options The options to create the bootstrap</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="kd">function</span> <span class="nx">Bootstrap</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">factory</span> <span class="o">=</span> <span class="nx">ioc</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;factory&#39;</span><span class="p">);</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>Handle the options and make sure defaults ones are used when
+no option is given</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="k">this</span><span class="p">.</span><span class="nx">options</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">defaults</span><span class="p">(</span>
+      <span class="nx">_</span><span class="p">.</span><span class="nx">pick</span><span class="p">(</span>
+        <span class="nx">options</span> <span class="o">||</span> <span class="p">{},</span>
+        <span class="s1">&#39;configFile&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;bootstrapFile&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;outputFile&#39;</span>
+      <span class="p">),</span>
+      <span class="p">{</span>
+        <span class="nx">configFile</span><span class="o">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">_home</span><span class="p">,</span> <span class="s1">&#39;.m2&#39;</span><span class="p">,</span> <span class="s1">&#39;msb.yml&#39;</span><span class="p">),</span>
+        <span class="nx">bootstrapFile</span><span class="o">:</span> <span class="s1">&#39;msb-settings.xml&#39;</span><span class="p">,</span>
+        <span class="nx">outputFile</span><span class="o">:</span> <span class="s1">&#39;settings.xml&#39;</span>
+      <span class="p">}</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">_</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">Bootstrap</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span> <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>Initialize the scaffolder</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">buildConfiguration</span><span class="p">();</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">buildGenerator</span><span class="p">();</span>
+    <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>Build the configuration which is the state of the tool</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">buildConfiguration</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">TemplateEngine</span> <span class="o">=</span> <span class="nx">ioc</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;template.engine&#39;</span><span class="p">);</span>
+
+      <span class="k">this</span><span class="p">.</span><span class="nx">config</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">factory</span><span class="p">.</span><span class="nx">createConfiguration</span><span class="p">(</span>
+        <span class="nx">_</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span>
+          <span class="nx">_</span><span class="p">.</span><span class="nx">pick</span><span class="p">(</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">,</span>
+            <span class="s1">&#39;configFile&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;bootstrapFile&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;outputFile&#39;</span>
+          <span class="p">),</span>
+          <span class="p">{</span>
+            <span class="nx">templateEngine</span><span class="o">:</span> <span class="k">new</span> <span class="nx">TemplateEngine</span><span class="p">()</span>
+          <span class="p">}</span>
+        <span class="p">)</span>
+      <span class="p">);</span>
+    <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>Build the settings.xml generator.</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">buildGenerator</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">generator</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">factory</span><span class="p">.</span><span class="nx">createGenerator</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">config</span><span class="p">);</span>
+    <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>Run the settings.xml generation.</p>
+  </div>
+  <div class="body"><p>The file operations are processed with non-blocking I/O.</p>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">run</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-8" id="section-8">&#182;</a>
+</div>
+<p>Execute the whole chain of promise</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">readConfiguration</span><span class="p">()</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">_</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">generator</span><span class="p">.</span><span class="nx">generateSettings</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">generator</span><span class="p">));</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+
+  <span class="k">return</span> <span class="nx">Bootstrap</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>

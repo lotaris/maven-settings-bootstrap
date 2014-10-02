@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<settings
+  xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+  <profiles>
+    <profile>
+      <id>profileOne</id>
+
+      <properties>
+        <profile.one.mysql.user>databaseUser</profile.one.mysql.user>
+        <profile.one.mysql.pass>databasePassword</profile.one.mysql.pass>
+        <profile.one.mysql.db>firstDatabaseName</profile.one.mysql.db>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>profileTwo</id>
+
+      <properties>
+        <profile.two.mysql.user>databaseUser</profile.two.mysql.user>
+        <profile.two.mysql.pass>databasePassword</profile.two.mysql.pass>
+        <profile.two.mysql.db>secondDatabaseName</profile.two.mysql.db>
+      </properties>
+    </profile>
+  </profiles>
+</settings>
