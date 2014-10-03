@@ -336,7 +336,7 @@ Please add a changelog entry with your name for new features and bug fixes.
 
 ## License
 
-API Copilot is licensed under the [MIT License](http://opensource.org/licenses/MIT).
+Maven Settings Bootstrap is licensed under the [MIT License](http://opensource.org/licenses/MIT).
 See [LICENSE.txt](LICENSE.txt) for the full text.
 
 [annotated-source]: http://lotaris.github.io/maven-settings-bootstrap/annotated/index.js.html
